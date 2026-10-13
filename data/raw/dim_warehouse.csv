@@ -1,0 +1,4 @@
+warehouse_id,warehouse_name,city,region,warehouse_role
+PUN,Pune Main Plant Warehouse,Pune,West,Main plant
+CHE,Chennai Regional Warehouse,Chennai,South,Regional
+GUR,Gurugram Regional Warehouse,Gurugram,North,Regional

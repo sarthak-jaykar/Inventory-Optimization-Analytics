@@ -1,0 +1,41 @@
+item_id,item_name,item_type,category,uom,unit_cost,abc_class,criticality
+RM001,32-bit Microcontroller,RM,Semiconductors,pcs,185.0,A,Critical
+RM002,Metering IC,RM,Semiconductors,pcs,210.0,A,Critical
+RM003,Power MOSFET,RM,Semiconductors,pcs,28.0,B,Critical
+RM004,Voltage Regulator IC,RM,Semiconductors,pcs,14.0,B,Standard
+RM005,GSM/Wi-Fi Communication Module,RM,Semiconductors,pcs,420.0,A,Critical
+RM006,Main PCB - Smart Meter,RM,PCBs,pcs,95.0,A,Critical
+RM007,PCB - LED Driver,RM,PCBs,pcs,42.0,B,Standard
+RM008,PCB - Power Adapter,RM,PCBs,pcs,38.0,B,Standard
+RM009,Electrolytic Capacitor 470uF,RM,Passive Components,pcs,6.5,C,Standard
+RM010,MLCC Capacitor 100nF,RM,Passive Components,pcs,0.8,C,Standard
+RM011,SMD Resistor 10k,RM,Passive Components,pcs,0.3,C,Standard
+RM012,Power Inductor,RM,Passive Components,pcs,12.0,B,Standard
+RM013,EE-core Transformer,RM,Passive Components,pcs,55.0,B,Critical
+RM014,Terminal Block,RM,Connectors & Cables,pcs,9.0,C,Standard
+RM015,DC Power Jack,RM,Connectors & Cables,pcs,4.5,C,Standard
+RM016,Wiring Harness,RM,Connectors & Cables,pcs,22.0,B,Standard
+RM017,USB-C Connector,RM,Connectors & Cables,pcs,7.0,C,Standard
+RM018,Meter Housing,RM,Enclosures & Displays,pcs,48.0,B,Standard
+RM019,LED Driver Casing,RM,Enclosures & Displays,pcs,25.0,B,Standard
+RM020,Adapter Shell,RM,Enclosures & Displays,pcs,15.0,C,Standard
+RM021,LCD Display Module,RM,Enclosures & Displays,pcs,130.0,A,Critical
+RM022,Carton Box,RM,Packaging,pcs,11.0,C,Standard
+RM023,Anti-static Bag,RM,Packaging,pcs,1.2,C,Standard
+RM024,Label & Manual Kit,RM,Packaging,pcs,2.5,C,Standard
+FG001,1-Phase Smart Meter,FG,Smart Energy Meters,pcs,1450.0,A,Critical
+FG002,3-Phase Smart Meter,FG,Smart Energy Meters,pcs,3200.0,A,Critical
+FG003,Prepaid Smart Meter,FG,Smart Energy Meters,pcs,1650.0,A,Critical
+FG004,CT-Operated Meter,FG,Smart Energy Meters,pcs,3800.0,B,Standard
+FG005,Meter Data Gateway,FG,Smart Energy Meters,pcs,2900.0,B,Standard
+FG006,LED Driver 18W,FG,LED Drivers,pcs,320.0,B,Standard
+FG007,LED Driver 36W,FG,LED Drivers,pcs,480.0,A,Standard
+FG008,LED Driver 60W,FG,LED Drivers,pcs,690.0,B,Standard
+FG009,Dimmable LED Driver 40W,FG,LED Drivers,pcs,760.0,B,Standard
+FG010,Street Light Driver 120W,FG,LED Drivers,pcs,1250.0,A,Critical
+FG011,Adapter 12V 2A,FG,Power Adapters,pcs,210.0,B,Standard
+FG012,Laptop Adapter 19V,FG,Power Adapters,pcs,540.0,A,Standard
+FG013,Adapter 24V 5A,FG,Power Adapters,pcs,620.0,B,Standard
+FG014,USB-C PD 65W Adapter,FG,Power Adapters,pcs,780.0,A,Critical
+FG015,Industrial Adapter 48V,FG,Power Adapters,pcs,1150.0,B,Standard
+FG016,Adapter 5V 1A,FG,Power Adapters,pcs,95.0,C,Standard

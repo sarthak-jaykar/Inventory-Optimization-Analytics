@@ -1,0 +1,107 @@
+INVENTORY ANALYTICS - DATA VALIDATION REPORT
+============================================================
+
+1. FILES, COLUMNS, DATA TYPES
+[PASS] dim_item.csv exists
+[PASS] dim_item: columns match spec (names and order)
+[PASS] dim_item: data types as expected
+[PASS] dim_warehouse.csv exists
+[PASS] dim_warehouse: columns match spec (names and order)
+[PASS] dim_warehouse: data types as expected
+[PASS] dim_item_location.csv exists
+[PASS] dim_item_location: columns match spec (names and order)
+[PASS] dim_item_location: data types as expected
+[PASS] fact_inventory_weekly.csv exists
+[PASS] fact_inventory_weekly: columns match spec (names and order)
+[PASS] fact_inventory_weekly: data types as expected
+[PASS] fact_replenishment_orders.csv exists
+[PASS] fact_replenishment_orders: columns match spec (names and order)
+[PASS] fact_replenishment_orders: data types as expected
+[PASS] fact_order_receipts.csv exists
+[PASS] fact_order_receipts: columns match spec (names and order)
+[PASS] fact_order_receipts: data types as expected
+
+2. MISSING VALUES
+[PASS] dim_item: no missing values  -> 0 nulls
+[PASS] dim_warehouse: no missing values  -> 0 nulls
+[PASS] dim_item_location: no missing values  -> 0 nulls
+[PASS] fact_inventory_weekly: no missing values  -> 0 nulls
+[PASS] fact_replenishment_orders: no missing values  -> 0 nulls
+[PASS] fact_order_receipts: no missing values  -> 0 nulls
+
+3. PRIMARY KEYS
+[PASS] dim_item.item_id unique
+[PASS] dim_warehouse.warehouse_id unique
+[PASS] dim_item_location.item_location_key unique
+[PASS] dim_item_location (item_id, warehouse_id) unique
+[PASS] fact_inventory_weekly (key, week) unique
+[PASS] fact_replenishment_orders.order_id unique
+[PASS] fact_order_receipts.receipt_id unique
+[PASS] item_location_key = item_id|warehouse_id
+
+4. FOREIGN KEYS / ORPHANS
+[PASS] dim_item_location.item_id in dim_item
+[PASS] dim_item_location.warehouse_id in dim_warehouse
+[PASS] fact_inventory_weekly keys in dim_item_location
+[PASS] fact_replenishment_orders keys in dim_item_location
+[PASS] fact_order_receipts.order_id in orders
+[PASS] every item-location has weekly rows
+[PASS] every item is stocked somewhere
+
+5. DATE VALIDITY
+[PASS] week_start_date are all Mondays
+[PASS] each item-location has exactly 26 contiguous weeks (5 Jan - 29 Jun 2026)
+[PASS] order_date within [4 Jan 2026, 5 Jul 2026]
+[PASS] receipt_date <= data end (5 Jul 2026)
+[PASS] receipt_date > order_date
+[PASS] expected_date = order_date + planned lead time
+
+6. NUMERIC RANGES
+[PASS] unit_cost > 0
+[PASS] lead time between 1 and 60 days
+[PASS] safety stock, cycle, max cover days > 0
+[PASS] max_cover_days >= safety_stock_days + order_cycle_days
+[PASS] ERP reorder point and order qty >= 1
+[PASS] weekly quantities all >= 0 (no negative stock)
+[PASS] order_qty >= 1 and received_qty >= 1
+
+7. STOCK RECONCILIATION (weekly)
+[PASS] closing = opening + receipts - fulfilled
+[PASS] fulfilled = min(demand, opening + receipts)
+[PASS] shortage = demand - fulfilled
+[PASS] opening(week t+1) = closing(week t)
+
+8. RECEIPTS & ON-ORDER RECONCILIATION
+[PASS] weekly receipts_qty = SUM(order receipts) for that item-location-week (exact)  -> 0 mismatches
+[PASS] total weekly receipts = total order receipts (no double counting)  -> 3,593,676 vs 3,593,676
+[PASS] every receipt falls in a modelled week
+[PASS] received total per order <= order_qty
+[PASS] order_status consistent with receipts
+[PASS] order_type consistent (RM=Purchase, FG=Production)
+[PASS] on_order_qty (week end) = cumulative order_qty - cumulative received_qty (exact)  -> 0 mismatches
+
+9. CLASSIFICATION & UNIT CONSISTENCY
+[PASS] item_type in {RM, FG} and matches id prefix
+[PASS] single unit of measure (pcs)
+[PASS] abc_class in {A,B,C}; criticality in {Critical,Standard}
+[PASS] safety_stock_days follows criticality (Critical=14, Standard=7)
+[PASS] order_cycle_days follows ABC (A=14, B=21, C=28)
+[PASS] max_cover_days = round-half-up(1.5 x (safety + cycle))
+[PASS] every warehouse stocks RM and FG items
+
+10. DATASET SIZE
+[PASS] transaction records within 1,000-5,000  -> 3,650
+
+INFORMATIONAL DATA PROFILE (not pass/fail)
+  Items: 40  Warehouses: 3  Item-locations: 90
+  Weekly rows: 2,340  Orders: 661  Receipts: 649
+  Order status counts: {'Closed': 592, 'Open': 68, 'Partially Received': 1}
+  Item-weeks with shortage: 111 (4.7%); item-locations affected: 31
+  Overall fill rate: 96.07%
+  Item-locations with zero closing stock in final week: 2
+  Item-locations with zero demand in the last 8 weeks: 3
+  Closing inventory value, final week (INR): 22,542,829
+  Avg first-receipt lead time: actual 16.4 d vs planned 15.0 d
+
+============================================================
+SUMMARY: 71 passed, 0 failed, 71 checks total
